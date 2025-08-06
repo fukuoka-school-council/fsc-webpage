@@ -1,0 +1,173 @@
+---
+import t from '@/utils/i18n'
+import { locale } from '@/pages/index.astro'
+
+const socialLinks = [
+  { name: t('footer.twitter', locale), href: 'https://twitter.com', icon: 'twitter' },
+  { name: t('footer.github', locale), href: 'https://github.com', icon: 'github' },
+  { name: t('footer.linkedin', locale), href: 'https://linkedin.com', icon: 'linkedin' }
+]
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <span class="visually-hidden">{t('header.title', locale)}</span>
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2" />
+          </svg>
+        </a>
+        <p class="footer-text">{t('footer.tagline', locale, { year: '2025' })}</p>
+      </div>
+      
+      <div class="footer-social">
+        <h3 class="footer-heading">{t('footer.connect', locale)}</h3>
+        <ul class="social-list">
+          {socialLinks.map(link => (
+            <li>
+              <a href={link.href} class="social-link" aria-label={link.name}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z" fill="currentColor" />
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p class="copyright">{t('footer.copyright', locale, { year: '2025' })}</p>
+      <nav aria-label="Footer navigation">
+        <ul class="footer-nav">
+          <li><a href="/privacy">{t('footer.privacy', locale)}</a></li>
+          <li><a href="/terms">{t('footer.terms', locale)}</a></li>
+          <li><a href="/contact">{t('footer.contact', locale)}</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-bg-alt);
+    padding: 2rem 0;
+    color: var(--color-text);
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .footer-text {
+    margin: 0;
+    max-width: 30ch;
+  }
+  
+  .footer-social {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .footer-heading {
+    margin: 0;
+    font-size: 1.125rem;
+  }
+  
+  .social-list {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--color-bg);
+    color: var(--color-text);
+    transition: all 0.2s;
+  }
+  
+  .social-link:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .copyright {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+  
+  .footer-nav {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.875rem;
+  }
+  
+  .footer-nav a:hover {
+    text-decoration: underline;
+  }
+  
+  @media (min-width: 768px) {
+    .footer-content {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    
+    .footer-bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+</style>
