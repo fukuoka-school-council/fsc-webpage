@@ -8,9 +8,36 @@ const locale = Astro.preferredLocale || Astro.currentLocale || "en"
 
 <Layout title="About Us">
   <Header />
-  <main>
+  <main style="max-width: 800px; margin: 0 auto; padding: 2rem;">
     <h1>About Our Organization</h1>
-    <!-- Your about page content here -->
+    
+    <div class="about-section" style="margin: 3rem 0;">
+      <div 
+        class="avatar" 
+        style="background: #4ade80; width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: white; font-weight: bold; font-size: 2rem;">
+        DEV
+      </div>
+    </div>
+    
+    <div class="content" style="line-height: 1.6; font-size: 1.1rem;">
+      <h2>Literary Inspirations</h2>
+      
+      <p>"Call me Ishmael." Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. It is a way I have of driving off the spleen and regulating the circulation.</p>
+      
+      <p>Happy families are all alike; every unhappy family is unhappy in its own way. Everything was in confusion in the Oblonskys' house. The wife had discovered that the husband was carrying on an intrigue with a French girl, who had been a governess in their family, and she had announced to her husband that she could not go on living in the same house with him.</p>
+      
+      <h3>From 1984</h3>
+      <p>It was a bright cold day in April, and the clocks were striking thirteen. Winston Smith, his chin nuzzled into his breast in an effort to escape the vile wind, slipped quickly through the glass doors of Victory Mansions, though not quickly enough to prevent a swirl of gritty dust from entering along with him.</p>
+      
+      <p>The hallway smelt of boiled cabbage and old rag mats. At one end of it a coloured poster, too large for indoor display, had been tacked to the wall. It depicted simply an enormous face, more than a metre wide: the face of a man of about forty-five, with a heavy black moustache and ruggedly handsome features. Winston made for the stairs. It was no use trying the lift. Even at the best of times it was seldom working, and at present the electric current was cut off during daylight hours. It was part of the economy drive in preparation for Hate Week.</p>
+      
+      <p>The flat was seven flights up, and Winston, who was thirty-nine and had a varicose ulcer above his right ankle, went slowly, resting several times on the way. On each landing, opposite the lift-shaft, the poster with the enormous face gazed from the wall. It was one of those pictures which are so contrived that the eyes follow you about when you move. BIG BROTHER IS WATCHING YOU, the caption beneath it ran.</p>
+      
+      <h3>More Classics</h3>
+      <p>It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair.</p>
+      
+      <p>In my younger and more vulnerable years my father gave me some advice that I've been turning over in my mind ever since. "Whenever you feel like criticizing any one," he told me, "just remember that all the people in this world haven't had the advantages that you've had."</p>
+    </div>
   </main>
   <Footer />
 </Layout>
