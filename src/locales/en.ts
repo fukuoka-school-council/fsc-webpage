@@ -9,9 +9,7 @@ const en: Record<string, Record<string, string>> = {
 		contact: "Contact",
 	},
 	footer: {
-		twitter: "Twitter",
-		github: "GitHub",
-		linkedin: "LinkedIn",
+		instagram: "Instagram",
 		connect: "Connect with us",
 		copyright: "© {year} Fukuoka School Council. All rights reserved.",
 		privacy: "Privacy Policy",

@@ -9,10 +9,7 @@ const ja: Record<string, Record<string, string>> = {
 		contact: "お問い合わせ",
 	},
 	footer: {
-		twitter: "Twitter",
-		github: "GitHub",
-		linkedin: "LinkedIn",
-		tagline: "{year}年からアクセシブルなデジタル体験を構築",
+		instagram: "Instagram",
 		connect: "私たちとつながる",
 		copyright: "© {year} 福岡生徒会連盟 無断複写・転載を禁じます",
 		privacy: "プライバシーポリシー",
