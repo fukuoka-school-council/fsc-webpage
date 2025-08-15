@@ -1,15 +1,75 @@
 ---
-import Footer from "@/components/Footer.astro"
-import Header from "@/components/Header.astro"
-import Layout from "@/layouts/Layout.astro"
-import { locale } from "@/pages/index.astro"
+import Layout from "@/layouts/Layout.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+
+const locale = Astro.preferredLocale || Astro.currentLocale || "en";
+
+const baseUrl = new URL(Astro.request.url);
+const response = await fetch(`${baseUrl.origin}/api/executives`);
+const executives = await response.json();
 ---
 
 <Layout title="Executives">
   <Header />
   <main>
     <h1>Our Leadership Team</h1>
-    <!-- Executives content here -->
+    <div class="executive-container">
+      {
+        executives.map(
+          (executive: { name: string; title: string; bio: string }) => (
+            <div class="executive-card">
+              <div
+                class="avatar"
+                style="background: #4ade80; width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: white; font-weight: bold; font-size: 2rem;"
+              >
+                DEV
+              </div>
+              <h2>{executive.name}</h2>
+              <p>{executive.title}</p>
+              <p>{executive.bio}</p>
+            </div>
+          ),
+        )
+      }
+    </div>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .executive-container {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .executive-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 32px;
+    margin-right: 32px;
+    width: 40%;
+  }
+  .executive-card h2 {
+    color: #2d3748;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  .executive-card p:first-of-type {
+    color: #4a5568;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .executive-card p:last-of-type {
+    color: #718096;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .executive-card {
+      width: '100%'
+    }
+  }
+</style>

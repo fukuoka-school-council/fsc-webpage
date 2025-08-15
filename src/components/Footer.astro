@@ -1,6 +1,7 @@
 ---
-import { locale } from "@/pages/index.astro"
 import t from "@/utils/i18n"
+
+const locale = Astro.preferredLocale || Astro.currentLocale || "en"
 
 const socialLinks = [
 	{
@@ -61,7 +62,7 @@ const socialLinks = [
   }
 
   .container {
-    max-width: 1350px;
+    max-width: 80vw;
     margin: 0 auto;
     padding: 0 1rem;
   }

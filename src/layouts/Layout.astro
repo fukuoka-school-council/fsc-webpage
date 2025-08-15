@@ -1,11 +1,16 @@
+---
+const locale = Astro.preferredLocale || Astro.currentLocale || "en"
+---
+
 <!doctype html>
-<html lang="en">
+<html lang={locale === "jp" ? "ja" : "en"}>
+
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>福岡生徒会連盟</title>
 	</head>
 	<body>
 		<slot />
@@ -18,5 +23,34 @@
 		margin: 0;
 		width: 100%;
 		height: 100%;
+	}
+
+	:root {
+		--font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+			Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+		--font-mono: "SF Mono", "Roboto Mono", Menlo, Monaco, Consolas,
+			"Liberation Mono", "Courier New", monospace;
+
+		--text-base: 1rem;
+		--text-lg: 1.125rem;
+		--text-xl: 1.25rem;
+		--text-2xl: 1.5rem;
+		--text-3xl: 1.875rem;
+		--text-4xl: 2.25rem;
+	}
+
+	:global(body) {
+		height: fit-content;
+		font-family: var(--font-sans);
+		font-size: var(--text-base);
+		line-height: 1.5;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-rendering: optimizeLegibility;
+	}
+
+	:global(main) {
+		width: 80vw;
+		margin-left: 10vw;
 	}
 </style>
