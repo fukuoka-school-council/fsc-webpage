@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"includes": ["**/*.{js,jsx,ts,tsx}"]
+		"includes": ["**/*.{js,jsx,ts,tsx,astro}", "!**/.astro"]
 	},
 	"formatter": {
 		"enabled": true,
@@ -16,7 +16,11 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"correctness": {
+				"noUnusedImports": "off",
+				"noUnusedVariables": "off"
+			}
 		}
 	},
 	"javascript": {

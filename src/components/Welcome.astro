@@ -1,15 +1,22 @@
 ---
-import companyLogo from "@/assets/astro.svg";
+import companyLogo from "@/assets/fsc.jpg"
+import t from "@/utils/i18n"
+
+const locale = Astro.preferredLocale || Astro.currentLocale || "en"
 ---
 
 <div id="container">
   <main>
     <section id="hero">
-      <img src={companyLogo.src} width="200" height="80" alt="Company Logo" />
-      <h1>人と人、生徒会と生徒会を福岡全土へ</h1>
+      <img src={companyLogo.src} alt="FSC Logo" />
+      <h1>{t("welcome.title", locale)}</h1>
       <section id="links">
-        <a class="button" href="/about">Learn About Us</a>
-        <a class="button secondary" href="/contact">Contact Us</a>
+        <a class="button" href="/about">{t("welcome.learnAboutUs", locale)}</a>
+        <a
+          class="button secondary"
+          href="https://www.instagram.com/fukuokaseitokai?igsh=aTEzZXdxNGtlZ2x6"
+          target="_blank">{t("welcome.contactUs", locale)}</a
+        >
       </section>
     </section>
   </main>
@@ -41,10 +48,18 @@ import companyLogo from "@/assets/astro.svg";
   #hero {
     height: 100dvh;
     display: flex;
-    align-items: start;
     flex-direction: column;
     justify-content: center;
     padding: 16px;
+  }
+
+  img {
+    width: 200px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 8px;
+    background: white;
   }
 
   h1 {
@@ -57,6 +72,7 @@ import companyLogo from "@/assets/astro.svg";
   #links {
     display: flex;
     gap: 16px;
+    margin-bottom: 20dvh;
   }
 
   #links a {
@@ -66,10 +82,6 @@ import companyLogo from "@/assets/astro.svg";
     color: #111827;
     text-decoration: none;
     transition: color 0.2s;
-  }
-
-  #links a:hover {
-    color: rgb(78, 80, 86);
   }
 
   #links a svg {
@@ -102,11 +114,6 @@ import companyLogo from "@/assets/astro.svg";
     background: rgba(255, 91, 79, 0.1);
   }
 
-  #links a.button:hover {
-    color: rgb(230, 230, 230);
-    box-shadow: none;
-  }
-
   pre {
     font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo,
       Consolas, "DejaVu Sans Mono", monospace;
@@ -135,7 +142,8 @@ import companyLogo from "@/assets/astro.svg";
 
   code {
     display: inline-block;
-    background: linear-gradient(66.77deg, #f3cddd 0%, #f5cee7 100%) padding-box,
+    background:
+      linear-gradient(66.77deg, #f3cddd 0%, #f5cee7 100%) padding-box,
       linear-gradient(155deg, #d83333 0%, #f041ff 18%, #f5cee7 45%) border-box;
     border-radius: 8px;
     border: 1px solid transparent;

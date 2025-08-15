@@ -3,19 +3,25 @@ const en: Record<string, Record<string, string>> = {
 		title: "Fukuoka School Council",
 		home: "Home",
 		about: "About",
-		services: "Services",
+		executives: "Executives",
+		organization: "Organization",
+		news: "News",
 		contact: "Contact",
 	},
 	footer: {
 		twitter: "Twitter",
 		github: "GitHub",
 		linkedin: "LinkedIn",
-		tagline: "Building accessible digital experiences since {year}",
 		connect: "Connect with us",
 		copyright: "© {year} Fukuoka School Council. All rights reserved.",
 		privacy: "Privacy Policy",
 		terms: "Terms of Service",
 		contact: "Contact Us",
+	},
+	welcome: {
+		title: "Connecting people and student councils across Fukuoka",
+		learnAboutUs: "Learn About Us",
+		contactUs: "Contact Us",
 	},
 }
 

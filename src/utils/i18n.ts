@@ -3,10 +3,10 @@ import jp from "src/locales/ja"
 
 export default function t(
 	rawKey: string,
-    locale: string,
+	locale: string,
 	placeholder?: Record<string, string>,
 ) {
-	const dictionary = locale === 'jp' ? jp : en
+	const dictionary = locale === "jp" ? jp : en
 
 	const [page, key] = rawKey.split(".")
 	const text = dictionary[page][key]

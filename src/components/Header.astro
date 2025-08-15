@@ -1,42 +1,83 @@
 ---
-import t from '@/utils/i18n'
-import { locale } from '@/pages/index.astro'
+import t from "@/utils/i18n"
+
+const locale = Astro.preferredLocale || Astro.currentLocale || "en"
 
 const links = [
-  { name: t('header.home', locale), href: '/' },
-  { name: t('header.about', locale), href: '/about' },
-  { name: t('header.services', locale), href: '/services' },
-  { name: t('header.contact', locale), href: '/contact' }
+	{ name: t("header.home", locale), href: "/" },
+	{ name: t("header.about", locale), href: "/about" },
+	{ name: t("header.executives", locale), href: "/executives" },
+	{ name: t("header.organization", locale), href: "/organization" },
+	{ name: t("header.news", locale), href: "/news" },
 ]
 ---
 
 <header class="header">
   <div class="container">
     <a href="/" class="logo">
-  <span class="visually-hidden">{t('header.title', locale)}</span>
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Your logo SVG here -->
-        <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2" />
-      </svg>
+      <span class="visually-hidden">{t("header.title", locale)}</span>
     </a>
-    
+
     <nav aria-label="Primary navigation">
       <ul class="nav-list">
-        {links.map(link => (
-          <li>
-            <a href={link.href} class="nav-link">{link.name}</a>
-          </li>
-        ))}
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href} class="nav-link">
+                {link.name}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
-    
-    <button class="mobile-menu-button" aria-label="Toggle mobile menu" aria-expanded="false">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+
+    <button
+      class="mobile-menu-button"
+      aria-label="Toggle mobile menu"
+      aria-expanded="false"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M3 12H21"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"></path>
+        <path
+          d="M3 6H21"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"></path>
+        <path
+          d="M3 18H21"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"></path>
       </svg>
     </button>
+
+    <script>
+      const menuButton = document.querySelector(".mobile-menu-button");
+      const navList: HTMLElement | null = document.querySelector(".nav-list");
+
+      if (menuButton && navList) {
+        menuButton.addEventListener("click", () => {
+          const isExpanded =
+            menuButton.getAttribute("aria-expanded") === "true";
+          menuButton.setAttribute(
+            "aria-expanded",
+            isExpanded ? "false" : "true",
+          );
+          navList.style.display = isExpanded ? "none" : "flex";
+        });
+      }
+    </script>
   </div>
 </header>
 
@@ -49,16 +90,16 @@ const links = [
     z-index: 100;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  
+
   .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1350px;
     margin: 0 auto;
     padding: 0 1rem;
   }
-  
+
   .logo {
     display: flex;
     align-items: center;
@@ -67,7 +108,7 @@ const links = [
     text-decoration: none;
     font-weight: bold;
   }
-  
+
   .nav-list {
     display: flex;
     gap: 1.5rem;
@@ -75,18 +116,18 @@ const links = [
     padding: 0;
     margin: 0;
   }
-  
+
   .nav-link {
     color: var(--color-text);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s;
   }
-  
+
   .nav-link:hover {
     color: var(--color-primary);
   }
-  
+
   .mobile-menu-button {
     display: none;
     background: none;
@@ -94,12 +135,33 @@ const links = [
     color: var(--color-text);
     cursor: pointer;
   }
-  
+
   @media (max-width: 768px) {
     .nav-list {
       display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      flex-direction: column;
+      gap: 0;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    
+
+    .nav-list.active {
+      display: flex;
+    }
+
+    .nav-list > * {
+      padding: 0.25rem 0;
+    }
+
+    .nav-link {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
     .mobile-menu-button {
       display: block;
     }
