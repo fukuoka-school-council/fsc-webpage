@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import { type HierarchyLink } from 'd3';
 import { useEffect } from 'preact/hooks';
 
 export default function OrganizationChart({ data }: { data: any }) {
