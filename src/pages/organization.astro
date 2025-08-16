@@ -1,16 +1,17 @@
 ---
+import organization from "@/assets/organization.jpg"
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
 import Layout from "@/layouts/Layout.astro"
-import organization from "@/assets/organization.jpg"
+import t from "@/utils/i18n"
 
 const locale = Astro.preferredLocale || Astro.currentLocale || "en"
 ---
 
-<Layout title="Organization Chart">
+<Layout title={t("organization.title", locale)}>
   <Header />
   <main>
-    <h1>Our Organization</h1>
+    <h1>{t("organization.title", locale)}</h1>
     <img src={organization.src} alt="Organization Structure" class="org-image" />
   </main>
   <Footer />

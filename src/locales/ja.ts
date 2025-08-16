@@ -21,9 +21,12 @@ const ja: Record<string, Record<string, string>> = {
 		learnAboutUs: "私たちについて",
 		contactUs: "お問い合わせ",
 	},
+	organization: {
+		title: "組織図",
+	},
 	executives: {
 		title: "幹部紹介",
-		grade: "年"
+		grade: "年",
 	},
 }
 

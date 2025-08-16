@@ -21,9 +21,12 @@ const en: Record<string, Record<string, string>> = {
 		learnAboutUs: "Learn About Us",
 		contactUs: "Contact Us",
 	},
+	organization: {
+		title: "Organization Chart",
+	},
 	executives: {
 		title: "Executives",
-		grade: "Grade"
+		grade: "Grade",
 	},
 }
 
