@@ -33,6 +33,10 @@ const en: Record<string, Record<string, string>> = {
 		name: "NPO Student Council Activities Promotion Association",
 		description: "Established on April 8, 2023, incorporated as an NPO on November 27, 2024.\nAlumni and current student council members from across Japan gather to develop human resources through student council activities, mainly online.\nIn addition to dispatching advisors to schools, we support the establishment and operation of student council networks, provide training for student council members, and conduct interviews, articles, and writing about advanced activities.\nJapan's largest comprehensive student council support organization.\nWe support the establishment and operation of the Fukuoka Student Council Federation."
 	},
+	news: {
+		title: "News",
+		noArticles: "No news articles yet.",
+	}
 }
 
 export default en

@@ -2,6 +2,7 @@
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
 import Layout from "@/layouts/Layout.astro"
+import t from "@/utils/i18n"
 
 const locale = Astro.preferredLocale || Astro.currentLocale || "en"
 
@@ -10,10 +11,10 @@ const response = await fetch(`${baseUrl.origin}/api/news`)
 const articles = await response.json()
 ---
 
-<Layout title="News">
+<Layout title={t("news.title", locale)}>
   <Header />
   <main>
-    <h1>Latest News</h1>
+    <h1>{t("news.title", locale)}</h1>
 
     {
       articles.length > 0 ? (
@@ -36,7 +37,7 @@ const articles = await response.json()
           )}
         </div>
       ) : (
-        <p>No news articles yet.</p>
+        <p>{t("news.noArticles", locale)}</p>
       )
     }
   </main>
