@@ -2,6 +2,7 @@
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
 import Layout from "@/layouts/Layout.astro"
+import t from "@/utils/i18n"
 
 const locale = Astro.preferredLocale || Astro.currentLocale || "en"
 
@@ -10,24 +11,29 @@ const response = await fetch(`${baseUrl.origin}/api/executives`)
 const executives = await response.json()
 ---
 
-<Layout title="Executives">
+<Layout title={t('executives.title', locale)}>
   <Header />
   <main>
-    <h1>Our Leadership Team</h1>
+    <h1>{t('executives.title', locale)}</h1>
     <div class="executive-container">
       {
         executives.map(
-          (executive: { name: string; title: string; bio: string }) => (
+          (executive: { name: string; furigana?: string; schoolRole: string; role: string; schoolName: string; grade: number; comment: string }) => (
             <div class="executive-card">
               <div
                 class="avatar"
-                style="background: #4ade80; width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: white; font-weight: bold; font-size: 2rem;"
+                style="background: #0067b2; width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: white; font-weight: bold; font-size: 2rem;"
               >
-                DEV
+                {executive.name.charAt(0)}
               </div>
-              <h2>{executive.name}</h2>
-              <p>{executive.title}</p>
-              <p>{executive.bio}</p>
+              <h2>{executive.name} <small>{executive.furigana ? `(${executive.furigana})` : ''}</small></h2>
+              <p>{executive.schoolRole} @ {executive.schoolName} - {
+                locale === "ja"
+                ? `${executive.grade}${t('executives.grade', locale)}`
+                : `${t('executives.grade', locale)} ${executive.grade}`
+              }</p>
+              <p><strong>{executive.role}</strong></p>
+              <p>{executive.comment}</p>
             </div>
           ),
         )

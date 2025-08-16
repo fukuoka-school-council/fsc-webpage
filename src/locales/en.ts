@@ -21,6 +21,10 @@ const en: Record<string, Record<string, string>> = {
 		learnAboutUs: "Learn About Us",
 		contactUs: "Contact Us",
 	},
+	executives: {
+		title: "Executives",
+		grade: "Grade"
+	},
 }
 
 export default en

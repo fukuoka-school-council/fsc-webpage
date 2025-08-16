@@ -21,6 +21,10 @@ const ja: Record<string, Record<string, string>> = {
 		learnAboutUs: "私たちについて",
 		contactUs: "お問い合わせ",
 	},
+	executives: {
+		title: "幹部紹介",
+		grade: "年"
+	},
 }
 
 export default ja
