@@ -1,24 +1,32 @@
 ---
-import Footer from "@/components/Footer.astro"
-import Header from "@/components/Header.astro"
-import Layout from "@/layouts/Layout.astro"
-import t from "@/utils/i18n"
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Layout from "@/layouts/Layout.astro";
+import t from "@/utils/i18n";
 
-const locale = Astro.preferredLocale || Astro.currentLocale || "en"
+const locale = Astro.preferredLocale || Astro.currentLocale || "en";
 
-const baseUrl = new URL(Astro.request.url)
-const response = await fetch(`${baseUrl.origin}/api/executives`)
-const executives = await response.json()
+const baseUrl = new URL(Astro.request.url);
+const response = await fetch(`${baseUrl.origin}/api/executives`);
+const executives = await response.json();
 ---
 
-<Layout title={t('executives.title', locale)}>
+<Layout title={t("executives.title", locale)}>
   <Header />
   <main>
-    <h1>{t('executives.title', locale)}</h1>
+    <h1>{t("executives.title", locale)}</h1>
     <div class="executive-container">
       {
         executives.map(
-          (executive: { name: string; furigana?: string; schoolRole: string; role: string; schoolName: string; grade: number; comment: string }) => (
+          (executive: {
+            name: string;
+            furigana?: string;
+            schoolRole: string;
+            role: string;
+            schoolName: string;
+            grade: number;
+            comment: string;
+          }) => (
             <div class="executive-card">
               <div
                 class="avatar"
@@ -26,24 +34,69 @@ const executives = await response.json()
               >
                 {executive.name.charAt(0)}
               </div>
-              <h2>{executive.name} <small>{executive.furigana ? `(${executive.furigana})` : ''}</small></h2>
-              <p>{executive.schoolRole} @ {executive.schoolName} - {
-                locale === "ja"
-                ? `${executive.grade}${t('executives.grade', locale)}`
-                : `${t('executives.grade', locale)} ${executive.grade}`
-              }</p>
-              <p><strong>{executive.role}</strong></p>
+              <h2>
+                {executive.name}{" "}
+                <small>
+                  {executive.furigana ? `(${executive.furigana})` : ""}
+                </small>
+              </h2>
+              <p>
+                {executive.schoolRole} @ {executive.schoolName} -{" "}
+                {locale === "ja"
+                  ? `${executive.grade}${t("executives.grade", locale)}`
+                  : `${t("executives.grade", locale)} ${executive.grade}`}
+              </p>
+              <p>
+                <strong>{executive.role}</strong>
+              </p>
               <p>{executive.comment}</p>
             </div>
           ),
         )
       }
     </div>
+    <div class="supporting-organization">
+      <h2>{t('supportingOrg.title', locale)}</h2>
+      <h3>{t('supportingOrg.name', locale)}</h3>
+      <div class="organization-description">
+        {t('supportingOrg.description', locale).split('\n').map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+    </div>
   </main>
   <Footer />
 </Layout>
 
 <style>
+  .supporting-organization {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 24px;
+    border-left: 4px solid #0067b2;
+    margin-bottom: 32px;
+  }
+
+  .supporting-organization h2 {
+    color: #0067b2;
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .supporting-organization h3 {
+    color: #2d3748;
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+
+  .organization-description p {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
   .executive-container {
     display: flex;
     flex-wrap: wrap;
@@ -54,8 +107,7 @@ const executives = await response.json()
     border-radius: 12px;
     padding: 24px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-bottom: 32px;
-    margin-right: 32px;
+    margin: 0 32px 32px 0;
     width: 40%;
   }
   .executive-card h2 {
@@ -75,7 +127,7 @@ const executives = await response.json()
 
   @media (max-width: 768px) {
     .executive-card {
-      width: '100%'
+      width: 100%;
     }
   }
 </style>
