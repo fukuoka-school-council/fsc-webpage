@@ -1,81 +1,27 @@
 ---
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
-import OrganizationChart from "@/components/OrganizationChart"
 import Layout from "@/layouts/Layout.astro"
+import organization from "@/assets/organization.jpg"
 
 const locale = Astro.preferredLocale || Astro.currentLocale || "en"
-
-type OrgData = {
-	name: string
-	children?: OrgData[]
-}
-
-const orgData: OrgData = {
-	name: "CEO",
-	children: [
-		{ name: "CTO", children: [{ name: "Dev Team" }] },
-		{ name: "CFO", children: [{ name: "Accounting" }] },
-		{ name: "COO", children: [{ name: "Operations" }] },
-	],
-}
 ---
 
 <Layout title="Organization Chart">
   <Header />
   <main>
     <h1>Our Organization</h1>
-    <OrganizationChart client:load data={orgData} />
-    <div class="position-descriptions">
-      <h2>Position Descriptions</h2>
-      <ul>
-        <li>
-          <strong>CEO</strong>Chief Executive Officer - Overall company
-          leadership
-        </li>
-        <li>
-          <strong>CTO</strong>Chief Technology Officer - Technology strategy and
-          development
-        </li>
-        <li>
-          <strong>CFO</strong>Chief Financial Officer - Financial management
-        </li>
-        <li><strong>COO</strong>Chief Operating Officer - Daily operations</li>
-        <li><strong>Dev Team</strong>Software development and engineering</li>
-        <li><strong>Accounting</strong>Financial records and reporting</li>
-        <li><strong>Operations</strong>Business processes and logistics</li>
-      </ul>
-    </div>
+    <img src={organization.src} alt="Organization Structure" class="org-image" />
   </main>
   <Footer />
 </Layout>
 
 <style>
-  .position-descriptions {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-  }
-  .position-descriptions h2 {
-    color: #2d3748;
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
-  }
-  .position-descriptions ul {
-    list-style: none;
-    padding: 0;
-  }
-  .position-descriptions li {
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #e2e8f0;
-  }
-  .position-descriptions li:last-child {
-    border-bottom: none;
-  }
-  .position-descriptions strong {
-    color: #4a5568;
-    display: inline-block;
-    min-width: 100px;
+  .org-image {
+    width: 100%;
+    margin: 2rem auto;
+    display: block;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
   }
 </style>
