@@ -6,9 +6,7 @@ import t from "@/utils/i18n"
 
 const locale = Astro.preferredLocale || Astro.currentLocale || "en"
 
-const baseUrl = new URL(Astro.request.url)
-const response = await fetch(`${baseUrl.origin}/api/executives`)
-const executives = await response.json()
+import executives from "@/data/executives.json"
 ---
 
 <Layout title={t("executives.title", locale)}>
