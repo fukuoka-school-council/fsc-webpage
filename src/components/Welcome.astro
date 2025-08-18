@@ -5,22 +5,20 @@ import t from "@/utils/i18n"
 const locale = Astro.preferredLocale || Astro.currentLocale || "en"
 ---
 
-<div id="container">
-  <main>
-    <section id="hero">
-      <img src={companyLogo.src} alt="FSC Logo" />
-      <h1>{t("welcome.title", locale)}</h1>
-      <section id="links">
-        <a class="button" href="/about">{t("welcome.learnAboutUs", locale)}</a>
-        <a
-          class="button secondary"
-          href="https://www.instagram.com/fukuokaseitokai?igsh=aTEzZXdxNGtlZ2x6"
-          target="_blank">{t("welcome.contactUs", locale)}</a
-        >
-      </section>
+<main>
+  <section id="hero">
+    <img src={companyLogo.src} alt="FSC Logo" />
+    <h1>{t("welcome.title", locale)}</h1>
+    <section id="links">
+      <a class="button" href="/about">{t("welcome.learnAboutUs", locale)}</a>
+      <a
+        class="button secondary"
+        href="https://www.instagram.com/fukuokaseitokai?igsh=aTEzZXdxNGtlZ2x6"
+        target="_blank">{t("welcome.contactUs", locale)}</a
+      >
     </section>
-  </main>
-</div>
+  </section>
+</main>
 
 <style>
   #background {
@@ -33,16 +31,13 @@ const locale = Astro.preferredLocale || Astro.currentLocale || "en"
     background: white;
   }
 
-  #container {
-    font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
-      Arial, sans-serif;
-    height: 100%;
-  }
-
   main {
     display: flex;
     align-items: center;
     flex-direction: column;
+    font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
+      Arial, sans-serif;
+    height: 100dvh;
   }
 
   #hero {
