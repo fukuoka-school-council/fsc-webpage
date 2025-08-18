@@ -11,7 +11,8 @@ const en: Record<string, Record<string, string>> = {
 	footer: {
 		instagram: "Instagram",
 		connect: "Connect with us",
-		copyright: "© {year} Fukuoka School Council. All rights reserved.",
+		copyright:
+			"© {year} Fukuoka School Council. Released under the MIT license.",
 		privacy: "Privacy Policy",
 		terms: "Terms of Service",
 		contact: "Contact Us",
@@ -27,6 +28,13 @@ const en: Record<string, Record<string, string>> = {
 	executives: {
 		title: "Executives",
 		grade: "Grade",
+	},
+	about: {
+		sloganTitle: "Slogan",
+		slogan: '"Connecting people and student councils across Fukuoka"',
+		purposeTitle: "Purpose",
+		purpose:
+			'Under our slogan "Connecting people and student councils across Fukuoka", we aim to create a sustainable student council community that connects to the future, with support from teachers.\nWe organize events like the Fukuoka Student Council Federation, where student council members from different schools discuss their strengths and challenges, gaining new perspectives on their own schools.',
 	},
 	supportingOrg: {
 		title: "Supporting Organization",

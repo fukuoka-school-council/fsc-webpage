@@ -19,10 +19,10 @@ import articles from "@/data/news.json"
         <div class="news-list">
           {articles.map(
             (article: {
-              id: string;
-              title: string;
-              content: string;
-              date: string;
+              id: string,
+              title: string,
+              content: string,
+              date: string,
             }) => (
               <article class="news-item">
                 <h2>{article.title}</h2>

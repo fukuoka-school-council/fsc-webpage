@@ -11,7 +11,7 @@ const ja: Record<string, Record<string, string>> = {
 	footer: {
 		instagram: "Instagram",
 		connect: "私たちとつながる",
-		copyright: "© {year} 福岡生徒会連盟 無断複写・転載を禁じます",
+		copyright: "© {year} 福岡生徒会連盟 MITライセンスの下に公開",
 		privacy: "プライバシーポリシー",
 		terms: "利用規約",
 		contact: "お問い合わせ",
@@ -27,6 +27,13 @@ const ja: Record<string, Record<string, string>> = {
 	executives: {
 		title: "幹部紹介",
 		grade: "年",
+	},
+	about: {
+		sloganTitle: "スローガン",
+		slogan: "『人と人、生徒会と生徒会を福岡全土へ』",
+		purposeTitle: "目的",
+		purpose:
+			"私たちは、『人と人、生徒会と生徒会を福岡全土へ』をスローガンに掲げ、先生方の手助け等をいただきながら、今後、未来へ繋ぐことの出来る生徒会のコミュニティを作り、福岡県の全生徒会が一丸となって、学校を盛り上げていくことを目的に活動をしています。\n私たちは、この目的を達成するために、福岡生徒会連盟というイベントや企画を行っています。福岡生徒会連盟では、各校の生徒会の方々を招待し、『学校間の壁を超え』それぞれの学校の良い点や課題となる点を話し合い、普段とは違った視点で自分たちの学校を見つめ直す機会を設けています。",
 	},
 	supportingOrg: {
 		title: "支援団体",
