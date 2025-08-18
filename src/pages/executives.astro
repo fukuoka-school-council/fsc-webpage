@@ -5,7 +5,8 @@ import executives from "@/data/executives.json"
 import Layout from "@/layouts/Layout.astro"
 import t from "@/utils/i18n"
 
-const locale = Astro.preferredLocale || Astro.currentLocale || "en"
+const locale =
+	(Astro.preferredLocale || Astro.currentLocale) === "ja" ? "ja" : "en"
 ---
 
 <Layout title={t("executives.title", locale)}>
@@ -16,13 +17,13 @@ const locale = Astro.preferredLocale || Astro.currentLocale || "en"
       {
         executives.map(
           (executive: {
-            name: string;
-            furigana?: string;
-            schoolRole: string;
-            role: string;
-            schoolName: string;
-            grade: number;
-            comment: string;
+            name: string,
+            furigana?: string,
+            schoolRole: string,
+            role: string,
+            schoolName: string,
+            grade: number,
+            comment: string,
           }) => (
             <div class="executive-card">
               <div class="avatar">{executive.name.charAt(0)}</div>

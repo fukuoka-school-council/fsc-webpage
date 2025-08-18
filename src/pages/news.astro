@@ -5,7 +5,8 @@ import articles from "@/data/news.json"
 import Layout from "@/layouts/Layout.astro"
 import t from "@/utils/i18n"
 
-const locale = Astro.preferredLocale || Astro.currentLocale || "en"
+const locale =
+	(Astro.preferredLocale || Astro.currentLocale) === "ja" ? "ja" : "en"
 ---
 
 <Layout title={t("news.title", locale)}>
@@ -16,19 +17,49 @@ const locale = Astro.preferredLocale || Astro.currentLocale || "en"
     {
       articles.length > 0 ? (
         <div class="news-list">
-          {articles.map(
+          {articles.reverse().map(
             (article: {
               id: string,
-              title: string,
-              content: string,
+              en: {
+                title: string,
+                content: string,
+              },
+              ja: {
+                title: string,
+                content: string,
+              },
               date: string,
+              author: {
+                name: string,
+                icon: string,
+              },
             }) => (
               <article class="news-item">
-                <h2>{article.title}</h2>
+                <h2>
+                  {article[locale].title ||
+                    article[locale === "ja" ? "en" : "ja"].title}
+                </h2>
+
                 <time datetime={article.date}>
                   {new Date(article.date).toLocaleDateString(locale)}
                 </time>
-                <p>{article.content}</p>
+                <div class="author">
+                  <img
+                    src={article.author.icon}
+                    alt={article.author.name}
+                    width="24"
+                    height="24"
+                  />
+                  <span>{article.author.name}</span>
+                </div>
+                {(
+                  article[locale].content ||
+                  article[locale === "ja" ? "en" : "ja"].content
+                )
+                  .split("\n")
+                  .map((paragraph) => (
+                    <p>{paragraph}</p>
+                  ))}
               </article>
             ),
           )}
@@ -58,6 +89,17 @@ const locale = Astro.preferredLocale || Astro.currentLocale || "en"
     font-size: 0.9rem;
     display: block;
     margin-bottom: 0.5rem;
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .author img {
+    border-radius: 50%;
   }
 
   form {

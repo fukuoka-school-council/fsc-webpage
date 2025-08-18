@@ -2,7 +2,8 @@
 import companyLogo from "@/assets/fsc.jpg"
 import t from "@/utils/i18n"
 
-const locale = Astro.preferredLocale || Astro.currentLocale || "en"
+const locale =
+	(Astro.preferredLocale || Astro.currentLocale) === "ja" ? "ja" : "en"
 ---
 
 <main>
