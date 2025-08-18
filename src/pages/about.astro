@@ -8,10 +8,10 @@ import t from "@/utils/i18n"
 const locale = Astro.preferredLocale || Astro.currentLocale || "en"
 ---
 
-<Layout title="About Us">
+<Layout title={t("about.title", locale)}>
   <Header />
   <main>
-    <h1>About Our Organization</h1>
+    <h1>{t("about.title", locale)}</h1>
 
     <div class="about-section">
       <img class="avatar" src={companyLogo.src} />

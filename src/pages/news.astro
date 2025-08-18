@@ -1,12 +1,11 @@
 ---
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
+import articles from "@/data/news.json"
 import Layout from "@/layouts/Layout.astro"
 import t from "@/utils/i18n"
 
 const locale = Astro.preferredLocale || Astro.currentLocale || "en"
-
-import articles from "@/data/news.json"
 ---
 
 <Layout title={t("news.title", locale)}>

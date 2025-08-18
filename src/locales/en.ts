@@ -24,12 +24,14 @@ const en: Record<string, Record<string, string>> = {
 	},
 	organization: {
 		title: "Organization Chart",
+		alt: `Roles and responsibilities (organization chart) The representative is 田中十和, and the support members are 阿部亮太, 針尾勇輝, and 岡本陽多.The vice representatives are 井上葉月 and 南里百恵.Below them, arranged horizontally, are "General Affairs: 田中十和 (members: 井上葉月 and 南里百恵)", "Design: 吉田美羽 (members: 針尾勇輝 and 古賀愛佳)", "Public Relations: 岡本陽多 (members: 髙浪実里 and 野本海晴)", "Planning: 栗山佑己 (members: 平塚裕樹 and 大石祥太郎)", and "Human Resources: 川島朱莉 (member: 里村美羽)".`,
 	},
 	executives: {
 		title: "Executives",
 		grade: "Grade",
 	},
 	about: {
+		title: "About Us",
 		sloganTitle: "Slogan",
 		slogan: '"Connecting people and student councils across Fukuoka"',
 		purposeTitle: "Purpose",

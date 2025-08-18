@@ -2,7 +2,7 @@ const ja: Record<string, Record<string, string>> = {
 	header: {
 		title: "福岡生徒会連盟",
 		home: "ホーム",
-		about: "目的",
+		about: "私たちについて",
 		executives: "幹部紹介",
 		organization: "組織図",
 		news: "お知らせ",
@@ -23,12 +23,14 @@ const ja: Record<string, Record<string, string>> = {
 	},
 	organization: {
 		title: "組織図",
+		alt: "役割分担 (組織図) 代表は田中十和、サポートは阿部亮太、針尾勇輝と岡本陽多。副代表は井上葉月と南里百恵。その下に「総務 田中十和 (メンバー 井上葉月と南里百恵)」、「デザイン 吉田美羽 (メンバー 針尾勇輝と古賀愛佳)」、「広報 岡本陽多 (メンバー 髙浪実里と野本海晴)」、「企画 栗山佑己 (メンバー 平塚裕樹と大石祥太郎)」、「人事 川島朱莉 (メンバー 里村美羽)」が横並びになっている。",
 	},
 	executives: {
 		title: "幹部紹介",
 		grade: "年",
 	},
 	about: {
+		title: "私たちについて",
 		sloganTitle: "スローガン",
 		slogan: "『人と人、生徒会と生徒会を福岡全土へ』",
 		purposeTitle: "目的",

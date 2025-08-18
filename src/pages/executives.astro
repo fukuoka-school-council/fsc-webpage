@@ -1,12 +1,11 @@
 ---
 import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
+import executives from "@/data/executives.json"
 import Layout from "@/layouts/Layout.astro"
 import t from "@/utils/i18n"
 
 const locale = Astro.preferredLocale || Astro.currentLocale || "en"
-
-import executives from "@/data/executives.json"
 ---
 
 <Layout title={t("executives.title", locale)}>
@@ -17,21 +16,16 @@ import executives from "@/data/executives.json"
       {
         executives.map(
           (executive: {
-            name: string,
-            furigana?: string,
-            schoolRole: string,
-            role: string,
-            schoolName: string,
-            grade: number,
-            comment: string,
+            name: string;
+            furigana?: string;
+            schoolRole: string;
+            role: string;
+            schoolName: string;
+            grade: number;
+            comment: string;
           }) => (
             <div class="executive-card">
-              <div
-                class="avatar"
-                style="background: #0067b2; width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: white; font-weight: bold; font-size: 2rem;"
-              >
-                {executive.name.charAt(0)}
-              </div>
+              <div class="avatar">{executive.name.charAt(0)}</div>
               <h2>
                 {executive.name}{" "}
                 <small>
@@ -54,12 +48,14 @@ import executives from "@/data/executives.json"
       }
     </div>
     <div class="supporting-organization">
-      <h2>{t('supportingOrg.title', locale)}</h2>
-      <h3>{t('supportingOrg.name', locale)}</h3>
+      <h2>{t("supportingOrg.title", locale)}</h2>
+      <h3>{t("supportingOrg.name", locale)}</h3>
       <div class="organization-description">
-        {t('supportingOrg.description', locale).split('\n').map((paragraph) => (
-          <p>{paragraph}</p>
-        ))}
+        {
+          t("supportingOrg.description", locale)
+            .split("\n")
+            .map((paragraph) => <p>{paragraph}</p>)
+        }
       </div>
     </div>
   </main>
@@ -121,6 +117,20 @@ import executives from "@/data/executives.json"
   .executive-card p:last-of-type {
     color: #718096;
     line-height: 1.6;
+  }
+
+  .avatar {
+    background: #0067b2;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
   }
 
   @media (max-width: 768px) {

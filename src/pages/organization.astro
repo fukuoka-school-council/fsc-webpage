@@ -12,7 +12,7 @@ const locale = Astro.preferredLocale || Astro.currentLocale || "en"
   <Header />
   <main>
     <h1>{t("organization.title", locale)}</h1>
-    <img src={organization.src} alt="Organization Structure" class="org-image" />
+    <img src={organization.src} alt={t("organization.alt", locale)} class="org-image" />
   </main>
   <Footer />
 </Layout>
