@@ -18,6 +18,7 @@ const en: Record<string, Record<string, string>> = {
 		contact: "Contact Us",
 	},
 	welcome: {
+    logoAlt: "Fukuoka School Council logo",
 		title: "Connecting people and student councils across Fukuoka",
 		learnAboutUs: "Learn About Us",
 		contactUs: "Contact Us",
@@ -31,13 +32,14 @@ const en: Record<string, Record<string, string>> = {
 		grade: "Grade",
 	},
 	about: {
-		title: "About Us",
-		sloganTitle: "Slogan",
-		slogan: '"Connecting people and student councils across Fukuoka"',
-		purposeTitle: "Purpose",
-		purpose:
-			'Under our slogan "Connecting people and student councils across Fukuoka", we aim to create a sustainable student council community that connects to the future, with support from teachers.\nWe organize events like the Fukuoka Student Council Federation, where student council members from different schools discuss their strengths and challenges, gaining new perspectives on their own schools.',
-	},
+    title: "About Us",
+    sloganTitle: "Slogan",
+    slogan: '"Connecting people and student councils across Fukuoka"',
+    purposeTitle: "Purpose",
+    purpose:
+      'Under our slogan "Connecting people and student councils across Fukuoka", we aim to create a sustainable student council community that connects to the future, with support from teachers.\nWe organize events like the Fukuoka Student Council Federation, where student council members from different schools discuss their strengths and challenges, gaining new perspectives on their own schools.',
+    logoAlt: "Fukuoka School Council logo",
+  },
 	supportingOrg: {
 		title: "Supporting Organization",
 		name: "NPO Student Council Activities Promotion Association",

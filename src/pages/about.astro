@@ -14,7 +14,7 @@ const locale = Astro.preferredLocale || Astro.currentLocale || "en"
     <h1>{t("about.title", locale)}</h1>
 
     <div class="about-section">
-      <img class="avatar" src={companyLogo.src} />
+      <img class="avatar" src={companyLogo.src} alt={t("about.logoAlt", locale)} />
     </div>
 
     <div class="content">

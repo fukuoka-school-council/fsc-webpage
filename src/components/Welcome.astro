@@ -7,14 +7,15 @@ const locale = Astro.preferredLocale || Astro.currentLocale || "en"
 
 <main>
   <section id="hero">
-    <img src={companyLogo.src} alt="FSC Logo" />
+    <img src={companyLogo.src} alt={t("welcome.logoAlt", locale)} />
     <h1>{t("welcome.title", locale)}</h1>
     <section id="links">
-      <a class="button" href="/about">{t("welcome.learnAboutUs", locale)}</a>
+      <a class="button" href="/about" aria-label={t("welcome.learnAboutUs", locale)}>{t("welcome.learnAboutUs", locale)}</a>
       <a
         class="button secondary"
         href="https://www.instagram.com/fukuokaseitokai?igsh=aTEzZXdxNGtlZ2x6"
-        target="_blank">{t("welcome.contactUs", locale)}</a
+        target="_blank"
+        aria-label={t("welcome.contactUs", locale)}>{t("welcome.contactUs", locale)}</a
       >
     </section>
   </section>
