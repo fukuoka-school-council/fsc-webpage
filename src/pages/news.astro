@@ -7,7 +7,6 @@ import t from "@/utils/i18n"
 
 const locale = Astro.preferredLocale || Astro.currentLocale
 const lang = locale === "ja" || locale === "jp" ? "ja" : "en"
-
 ---
 
 <Layout title={t("news.title", locale)}>
