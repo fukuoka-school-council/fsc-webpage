@@ -5,8 +5,9 @@ import articles from "@/data/news.json"
 import Layout from "@/layouts/Layout.astro"
 import t from "@/utils/i18n"
 
-const locale =
-	(Astro.preferredLocale || Astro.currentLocale) === "ja" ? "ja" : "en"
+const locale = Astro.preferredLocale || Astro.currentLocale
+const lang = locale === "ja" || locale === "jp" ? "ja" : "en"
+
 ---
 
 <Layout title={t("news.title", locale)}>
@@ -36,12 +37,12 @@ const locale =
             }) => (
               <article class="news-item">
                 <h2>
-                  {article[locale].title ||
-                    article[locale === "ja" ? "en" : "ja"].title}
+                  {article[lang].title ||
+                    article[lang === "ja" ? "en" : "ja"].title}
                 </h2>
 
                 <time datetime={article.date}>
-                  {new Date(article.date).toLocaleDateString(locale)}
+                  {new Date(article.date).toLocaleDateString(lang)}
                 </time>
                 <div class="author">
                   <img
@@ -53,8 +54,8 @@ const locale =
                   <span>{article.author.name}</span>
                 </div>
                 {(
-                  article[locale].content ||
-                  article[locale === "ja" ? "en" : "ja"].content
+                  article[lang].content ||
+                  article[lang === "ja" ? "en" : "ja"].content
                 )
                   .split("\n")
                   .map((paragraph) => (

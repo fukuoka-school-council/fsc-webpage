@@ -2,8 +2,7 @@
 import companyLogo from "@/assets/fsc.jpg"
 import t from "@/utils/i18n"
 
-const locale =
-	(Astro.preferredLocale || Astro.currentLocale) === "ja" ? "ja" : "en"
+const locale = Astro.preferredLocale || Astro.currentLocale
 ---
 
 <main>
@@ -11,12 +10,18 @@ const locale =
     <img src={companyLogo.src} alt={t("welcome.logoAlt", locale)} />
     <h1>{t("welcome.title", locale)}</h1>
     <section id="links">
-      <a class="button" href="/about" aria-label={t("welcome.learnAboutUs", locale)}>{t("welcome.learnAboutUs", locale)}</a>
+      <a
+        class="button"
+        href="/about"
+        aria-label={t("welcome.learnAboutUs", locale)}
+        >{t("welcome.learnAboutUs", locale)}</a
+      >
       <a
         class="button secondary"
         href="https://www.instagram.com/fukuokaseitokai?igsh=aTEzZXdxNGtlZ2x6"
         target="_blank"
-        aria-label={t("welcome.contactUs", locale)}>{t("welcome.contactUs", locale)}</a
+        aria-label={t("welcome.contactUs", locale)}
+        >{t("welcome.contactUs", locale)}</a
       >
     </section>
   </section>

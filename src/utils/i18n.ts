@@ -1,12 +1,13 @@
 import en from "src/locales/en"
-import jp from "src/locales/ja"
+import ja from "src/locales/ja"
 
 export default function t(
 	rawKey: string,
-	locale: string,
+	locale: string | undefined,
 	placeholder?: Record<string, string>,
 ) {
-	const dictionary = locale === "jp" ? jp : en
+	if (!locale) return "Error: Locale undefined. Please contact to dev."
+	const dictionary = locale === "ja" || locale === "jp" ? ja : en
 
 	const [page, key] = rawKey.split(".")
 	const text = dictionary[page][key]

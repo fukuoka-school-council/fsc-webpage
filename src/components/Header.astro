@@ -1,8 +1,7 @@
 ---
 import t from "@/utils/i18n"
 
-const locale =
-	(Astro.preferredLocale || Astro.currentLocale) === "ja" ? "ja" : "en"
+const locale = Astro.preferredLocale || Astro.currentLocale
 
 const links = [
 	{ name: t("header.home", locale), href: "/" },

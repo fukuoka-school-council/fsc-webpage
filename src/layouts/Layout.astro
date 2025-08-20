@@ -1,10 +1,9 @@
 ---
-const locale = Astro.preferredLocale || Astro.currentLocale || "en"
+const locale = Astro.preferredLocale || Astro.currentLocale
 ---
 
 <!doctype html>
-<html lang={locale === "jp" ? "ja" : "en"}>
-
+<html lang={(locale === "ja" || locale === "jp") ? "ja" : "en"}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />

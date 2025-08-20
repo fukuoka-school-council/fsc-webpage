@@ -5,8 +5,7 @@ import Header from "@/components/Header.astro"
 import Layout from "@/layouts/Layout.astro"
 import t from "@/utils/i18n"
 
-const locale =
-	(Astro.preferredLocale || Astro.currentLocale) === "ja" ? "ja" : "en"
+const locale = Astro.preferredLocale || Astro.currentLocale
 ---
 
 <Layout title={t("organization.title", locale)}>
