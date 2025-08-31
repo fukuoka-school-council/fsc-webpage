@@ -7,6 +7,7 @@ export default function t(
 	placeholder?: Record<string, string>,
 ) {
 	if (!locale) return "Error: Locale undefined. Please contact to dev."
+
 	const dictionary = locale === "ja" || locale === "jp" ? ja : en
 
 	const [page, key] = rawKey.split(".")

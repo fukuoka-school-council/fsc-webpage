@@ -3,12 +3,11 @@ import executivesData from "@/data/executives.json"
 import newsData from "@/data/news.json"
 import Layout from "@/layouts/Layout.astro"
 import type { ContentUnion } from "@/types/content"
-// TODO: internationalize
-// import t from "@/utils/i18n"
+import t from "@/utils/i18n"
 
 export const prerender = false
 
-// const locale = Astro.preferredLocale || Astro.currentLocale
+const locale = Astro.preferredLocale || Astro.currentLocale
 const token = Astro.url.searchParams.get("token")
 
 // GitHub API configuration
@@ -31,15 +30,18 @@ async function createMergeRequest(
 			},
 		)
 
-    const fileData = await getResponse.json()
+		const fileData = await getResponse.json()
 
-    if (!getResponse.ok) {
-        return { success: false, message: `Failed to get file SHA: ${fileData.message}` }
-    }
+		if (!getResponse.ok) {
+			return {
+				success: false,
+				message: `Failed to get file SHA: ${fileData.message}`,
+			}
+		}
 
-    const sha = fileData.sha
+		const sha = fileData.sha
 
-    console.log(sha)
+		console.log(sha)
 
 		// Now update the file with the SHA
 		const response = await fetch(
@@ -52,9 +54,9 @@ async function createMergeRequest(
 				},
 				body: JSON.stringify({
 					message: commitMessage,
-					content: Buffer.from(JSON.stringify(content, null, 2)).toString(
-						"base64",
-					),
+					content: Buffer.from(
+						JSON.stringify(content, null, 2),
+					).toString("base64"),
 					branch: GITHUB_BRANCH,
 					sha: sha,
 				}),
@@ -62,7 +64,10 @@ async function createMergeRequest(
 		)
 
 		if (response.ok) {
-			return { success: true, message: "Merge request created successfully!" }
+			return {
+				success: true,
+				message: t("admin.mergeRequestSuccess", locale),
+			}
 		} else {
 			const error = await response.json()
 			return { success: false, message: error.message }
@@ -71,7 +76,9 @@ async function createMergeRequest(
 		return {
 			success: false,
 			message:
-				error instanceof Error ? error.message : "An unknown error occurred",
+				error instanceof Error
+					? error.message
+					: t("admin.unknownError", locale),
 		}
 	}
 }
@@ -84,7 +91,9 @@ if (Astro.request.method === "POST") {
 	const type = formData.get("type")
 
 	const filePath =
-		type === "executives" ? "src/data/executives.json" : "src/data/news.json"
+		type === "executives"
+			? "src/data/executives.json"
+			: "src/data/news.json"
 	const commitMessage = `auto: Update ${type} data`
 
 	if (type === "executives") {
@@ -98,12 +107,20 @@ if (Astro.request.method === "POST") {
 
 			executives.push({
 				name: String(name),
-				furigana: String(formData.get(`executives[${index}][furigana]`) || ""),
-				schoolRole: String(formData.get(`executives[${index}][schoolRole]`)),
+				furigana: String(
+					formData.get(`executives[${index}][furigana]`) || "",
+				),
+				schoolRole: String(
+					formData.get(`executives[${index}][schoolRole]`),
+				),
 				role: String(formData.get(`executives[${index}][role]`)),
-				schoolName: String(formData.get(`executives[${index}][schoolName]`)),
+				schoolName: String(
+					formData.get(`executives[${index}][schoolName]`),
+				),
 				grade: Number(formData.get(`executives[${index}][grade]`)),
-				comment: String(formData.get(`executives[${index}][comment]`) || ""),
+				comment: String(
+					formData.get(`executives[${index}][comment]`) || "",
+				),
 			})
 			index++
 		}
@@ -136,7 +153,9 @@ if (Astro.request.method === "POST") {
 			const shouldDelete =
 				formData.get(`news[${index}][delete]`)?.toString() === "true"
 			if (!shouldDelete) {
-				const existingArticle = newsData.find((article) => article.id === index)
+				const existingArticle = newsData.find(
+					(article) => article.id === index,
+				)
 				if (existingArticle) {
 					news.push(existingArticle)
 				} else {
@@ -147,16 +166,28 @@ if (Astro.request.method === "POST") {
 						id: index,
 						date: date,
 						en: {
-							title: String(formData.get(`news[${index}][en][title]`)),
-							content: String(formData.get(`news[${index}][en][content]`)),
+							title: String(
+								formData.get(`news[${index}][en][title]`),
+							),
+							content: String(
+								formData.get(`news[${index}][en][content]`),
+							),
 						},
 						ja: {
-							title: String(formData.get(`news[${index}][ja][title]`)),
-							content: String(formData.get(`news[${index}][ja][content]`)),
+							title: String(
+								formData.get(`news[${index}][ja][title]`),
+							),
+							content: String(
+								formData.get(`news[${index}][ja][content]`),
+							),
 						},
 						author: {
-							name: String(formData.get(`news[${index}][author][name]`)),
-							icon: String(formData.get(`news[${index}][author][icon]`)),
+							name: String(
+								formData.get(`news[${index}][author][name]`),
+							),
+							icon: String(
+								formData.get(`news[${index}][author][icon]`),
+							),
 						},
 					})
 				}
@@ -172,15 +203,15 @@ if (Astro.request.method === "POST") {
 <Layout title="Admin Panel">
   <main class="admin-container">
     <div class="header-section">
-      <h1 class="page-title">Admin Dashboard</h1>
-      <p class="page-subtitle">Manage executives and news content with precision</p>
+      <h1 class="page-title">{t("admin.title", locale)}</h1>
+      <p class="page-subtitle">{t("admin.subtitle", locale)}</p>
     </div>
     
     {!token ? (
       <div class="auth-error">
-        <h2>Authentication Required</h2>
-        <p>Please provide a valid GitHub token in the URL: /admin?token=YOUR_TOKEN</p>
-      </div>
+          <h2>{t("admin.authError", locale)}</h2>
+          <p>{t("admin.authMessage", locale)}</p>
+        </div>
     ) : (
       <>
         {result && (
@@ -191,67 +222,129 @@ if (Astro.request.method === "POST") {
         
         <form method="POST" class="admin-form">
           <div class="form-group">
-            <label for="type">Select Data Type:</label>
+            <label for="type">{t("admin.selectType", locale)}</label>
             <select id="type" name="type">
-              <option value="executives">Executives</option>
-              <option value="news">News Articles</option>
+              <option value="executives">{t("admin.executives", locale)}</option>
+              <option value="news">{t("admin.news", locale)}</option>
             </select>
           </div>
           
           <div id="executives-editor" class="editor-section">
-            <h2>Edit Executives</h2>
+            <h2>{t("admin.editExecutives", locale)}</h2>
             <div id="executives-container">
               {executivesData.map((executive, index) => (
                 <div class="executive-item">
-                  <h3>Executive #{index + 1}</h3>
+                  <h3>{t('admin.executiveNumber', locale, { index: String(index + 1) })}</h3>
                   <div class="form-row">
-                    <input type="text" name={`executives[${index}][name]`} value={executive.name} placeholder="Name" />
-                    <input type="text" name={`executives[${index}][furigana]`} value={executive.furigana || ""} placeholder="Furigana" />
+                    <input type="text" name={`executives[${index}][name]`} value={executive.name} placeholder={t('admin.name', locale)} />
+                    <input type="text" name={`executives[${index}][furigana]`} value={executive.furigana || ""} placeholder={t('admin.furigana', locale)} />
                   </div>
                   <div class="form-row">
-                    <input type="text" name={`executives[${index}][schoolRole]`} value={executive.schoolRole} placeholder="School Role" />
-                    <input type="text" name={`executives[${index}][role]`} value={executive.role} placeholder="FSC Role" />
+                    <input type="text" name={`executives[${index}][schoolRole]`} value={executive.schoolRole} placeholder={t('admin.schoolRole', locale)} />
+                    <input type="text" name={`executives[${index}][role]`} value={executive.role} placeholder={t('admin.fscRole', locale)} />
                   </div>
                   <div class="form-row">
-                    <input type="text" name={`executives[${index}][schoolName]`} value={executive.schoolName} placeholder="School Name" />
-                    <input type="number" name={`executives[${index}][grade]`} value={executive.grade} placeholder="Grade" />
+                    <input type="text" name={`executives[${index}][schoolName]`} value={executive.schoolName} placeholder={t('admin.schoolName', locale)} />
+                    <input type="number" name={`executives[${index}][grade]`} value={executive.grade} placeholder={t('admin.grade', locale)} />
                   </div>
-                  <textarea name={`executives[${index}][comment]`} placeholder="Comment">{executive.comment}</textarea>
+                  <textarea name={`executives[${index}][comment]`} placeholder={t('admin.comment', locale)}>{executive.comment}</textarea>
                 </div>
               ))}
             </div>
-            <button type="button" class="add-btn">Add Executive</button>
+            <button type="button" class="add-btn">{t("admin.addExecutive", locale)}</button>
           </div>
           
           <div id="news-editor" class="editor-section" style="display: none;">
-            <h2>Edit News Articles</h2>
+            <h2>{t("admin.editNews", locale)}</h2>
             <div id="news-container">
               {newsData.map((article, index) => (
                 <div class="news-item">
                   <div class="form-row">
-                    <h3>Article #{index + 1}</h3>
+                    <h3>{t('admin.articleNumber', locale, { index: String(index + 1) })}</h3>
                     <label class="delete-checkbox">
                       <input type="checkbox" name={`news[${index}][delete]`} value="true" />
-                      Delete this article
+                      {t('admin.deleteArticle', locale)}
                     </label>
                   </div>
                   <div class="readonly-info">
-                    <p><strong>Date:</strong> {article.date.split('T')[0]}</p>
-                    <p><strong>English Title:</strong> {article.en.title}</p>
-                    <p><strong>Japanese Title:</strong> {article.ja.title}</p>
-                    {article.author?.name && <p><strong>Author:</strong> {article.author.name}</p>}
+                    <p><strong>{t('admin.date', locale)}:</strong> {article.date.split('T')[0]}</p>
+                    <p><strong>{t('admin.englishTitle', locale)}:</strong> {article.en.title}</p>
+                    <p><strong>{t('admin.japaneseTitle', locale)}:</strong> {article.ja.title}</p>
+                    {article.author?.name && <p><strong>{t('admin.author', locale)}:</strong> {article.author.name}</p>}
                   </div>
                   <input type="hidden" name={`news[${index}][id]`} value={article.id} />
                 </div>
               ))}
             </div>
-            <button type="button" class="add-btn">Add Article</button>
+            <button type="button" class="add-btn">{t("admin.addArticle", locale)}</button>
           </div>
           
-          <button type="submit" class="submit-btn">Create Merge Request</button>
+          <button type="submit" class="submit-btn">{t("admin.createMergeRequest", locale)}</button>
         </form>
         
         <script>
+          const locale = navigator.languages[0] || navigator.language // preferred -> current
+
+          function t(key: string, locale: string, placeholder?: { [key: string]: string }) {
+            const enTranslations: { [key: string]: string } = {
+              "name": "Name",
+              "furigana": "Furigana",
+              "schoolRole": "School Role",
+              "fscRole": "FSC Role",
+              "schoolName": "School Name",
+              "grade": "Grade",
+              "comment": "Comment",
+              "englishTitle": "English Title",
+              "englishContent": "English Content",
+              "japaneseTitle": "Japanese Title",
+              "japaneseContent": "Japanese Content",
+              "authorName": "Author Name",
+              "authorIcon": "Author Icon URL",
+              "deleteArticle": "Delete this article",
+              "date": "Date",
+              "author": "Author",
+              "executiveNumber": "Executive #{index}",
+              "articleNumber": "Article #{index}",
+              "englishVersion": "English Version",
+              "japaneseVersion": "Japanese Version"
+            }
+            
+            const jaTranslations: { [key: string]: string } = {
+              "name": "名前",
+              "furigana": "ふりがな",
+              "schoolRole": "学校での役職",
+              "fscRole": "FSCでの役職",
+              "schoolName": "学校名",
+              "grade": "学年",
+              "comment": "コメント",
+              "englishTitle": "英語タイトル",
+              "englishContent": "英語コンテンツ",
+              "japaneseTitle": "日本語タイトル",
+              "japaneseContent": "日本語コンテンツ",
+              "authorName": "著者名",
+              "authorIcon": "著者アイコンURL",
+              "deleteArticle": "この記事を削除",
+              "date": "日付",
+              "author": "著者",
+              "executiveNumber": "役員 #{index}",
+              "articleNumber": "記事 #{index}",
+              "englishVersion": "英語版",
+              "japaneseVersion": "日本語版"
+            }
+            
+            const translations = (locale === "ja" || locale === "jp") ? jaTranslations : enTranslations
+            let text = translations[key] || key
+
+            if (placeholder) {
+              return Object.entries(placeholder).reduce(
+                (text, [key, value]) => text.replace(`{${key}}`, value),
+                text,
+              )
+            }
+
+            return text
+          }
+
           function updateForm() {
             const type = (document.getElementById('type') as HTMLSelectElement)?.value
 
@@ -324,20 +417,20 @@ if (Astro.request.method === "POST") {
             const index = container?.children.length || 0
             const newExecutive = `
               <div class="executive-item add-item" style="${itemStyles}">
-                <h3 style="${headingStyles}">Executive #${index + 1}</h3>
+                <h3 style="${headingStyles}">${t('executiveNumber', locale, { index: String(index + 1) })}</h3>
                 <div style="${gridStyles}">
-                  <input type="text" name="executives[${index}][name]" placeholder="Name" style="${inputStyles}" />
-                  <input type="text" name="executives[${index}][furigana]" placeholder="Furigana" style="${inputStyles}" />
+                  <input type="text" name="executives[${index}][name]" placeholder="${t('name', locale)}" style="${inputStyles}" />
+                  <input type="text" name="executives[${index}][furigana]" placeholder="${t('furigana', locale)}" style="${inputStyles}" />
                 </div>
                 <div style="${gridStyles}">
-                  <input type="text" name="executives[${index}][schoolRole]" placeholder="School Role" style="${inputStyles}" />
-                  <input type="text" name="executives[${index}][role]" placeholder="FSC Role" style="${inputStyles}" />
+                  <input type="text" name="executives[${index}][schoolRole]" placeholder="${t('schoolRole', locale)}" style="${inputStyles}" />
+                  <input type="text" name="executives[${index}][role]" placeholder="${t('fscRole', locale)}" style="${inputStyles}" />
                 </div>
                 <div style="${gridStyles}">
-                  <input type="text" name="executives[${index}][schoolName]" placeholder="School Name" style="${inputStyles}" />
-                  <input type="number" name="executives[${index}][grade]" placeholder="Grade" style="${inputStyles}" />
+                  <input type="text" name="executives[${index}][schoolName]" placeholder="${t('schoolName', locale)}" style="${inputStyles}" />
+                  <input type="number" name="executives[${index}][grade]" placeholder="${t('grade', locale)}" style="${inputStyles}" />
                 </div>
-                <textarea name="executives[${index}][comment]" placeholder="Comment" style="${textareaStyles}"></textarea>
+                <textarea name="executives[${index}][comment]" placeholder="${t('comment', locale)}" style="${textareaStyles}"></textarea>
 
                 <style>
                   ${basicStyles}
@@ -352,19 +445,19 @@ if (Astro.request.method === "POST") {
             const index = container?.children.length || 0
             const newArticle = `
               <div class="news-item add-item" style="${itemStyles}">
-                <h3 style="${headingStyles}">Article #${index + 1}</h3>
+                <h3 style="${headingStyles}">${t('articleNumber', locale, { index: String(index + 1) })}</h3>
                 
-                <h4 style="${subheadingStyles}">English Version</h4>
-                <input type="text" name="news[${index}][en][title]" placeholder="English Title" style="${inputStyles} margin-bottom: 1rem;" />
-                <textarea name="news[${index}][en][content]" placeholder="English Content" style="${textareaStyles}"></textarea>
+                <h4 style="${subheadingStyles}">${t('englishVersion', locale)}</h4>
+                <input type="text" name="news[${index}][en][title]" placeholder="${t('englishTitle', locale)}" style="${inputStyles} margin-bottom: 1rem;" />
+                <textarea name="news[${index}][en][content]" placeholder="${t('englishContent', locale)}" style="${textareaStyles}"></textarea>
                 
-                <h4 style="${subheadingStyles}">Japanese Version</h4>
-                <input type="text" name="news[${index}][ja][title]" placeholder="Japanese Title" style="${inputStyles} margin-bottom: 1rem;" />
-                <textarea name="news[${index}][ja][content]" placeholder="Japanese Content" style="${textareaStyles}"></textarea>
+                <h4 style="${subheadingStyles}">${t('japaneseVersion', locale)}</h4>
+                <input type="text" name="news[${index}][ja][title]" placeholder="${t('japaneseTitle', locale)}" style="${inputStyles} margin-bottom: 1rem;" />
+                <textarea name="news[${index}][ja][content]" placeholder="${t('japaneseContent', locale)}" style="${textareaStyles}"></textarea>
                 
                 <div style="${gridStyles}">
-                  <input type="text" name="news[${index}][author][name]" placeholder="Author Name" style="${inputStyles}" />
-                  <input type="text" name="news[${index}][author][icon]" placeholder="Author Icon URL" style="${inputStyles}" />
+                  <input type="text" name="news[${index}][author][name]" placeholder="${t('authorName', locale)}" style="${inputStyles}" />
+                  <input type="text" name="news[${index}][author][icon]" placeholder="${t('authorIcon', locale)}" style="${inputStyles}" />
                 </div>
                 <input type="hidden" name="news[${index}][id]" value="${index}" />
 

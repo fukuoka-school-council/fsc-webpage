@@ -26,7 +26,10 @@
 	"javascript": {
 		"formatter": {
 			"quoteStyle": "double",
-			"semicolons": "asNeeded"
+			"semicolons": "asNeeded",
+			"indentStyle": "tab",
+			"indentWidth": 4,
+			"lineWidth": 80
 		}
 	},
 	"assist": {
