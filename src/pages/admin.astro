@@ -22,6 +22,27 @@ async function createMergeRequest(
 	commitMessage: string,
 ) {
 	try {
+		// First, get the current file's SHA
+		const getResponse = await fetch(
+			`https://api.github.com/repos/fukuoka-school-council/fsc-webpage/contents/${filePath}?ref=${GITHUB_BRANCH}`,
+			{
+				headers: {
+					Authorization: `token ${token}`,
+				},
+			},
+		)
+
+    const fileData = await getResponse.json()
+
+    if (!getResponse.ok) {
+        return { success: false, message: `Failed to get file SHA: ${fileData.message}` }
+    }
+
+    const sha = fileData.sha
+
+    console.log(sha)
+
+		// Now update the file with the SHA
 		const response = await fetch(
 			`https://api.github.com/repos/fukuoka-school-council/fsc-webpage/contents/${filePath}`,
 			{
@@ -36,6 +57,7 @@ async function createMergeRequest(
 						"base64",
 					),
 					branch: GITHUB_BRANCH,
+					sha: sha,
 				}),
 			},
 		)
@@ -64,7 +86,7 @@ if (Astro.request.method === "POST") {
 
 	const filePath =
 		type === "executives" ? "src/data/executives.json" : "src/data/news.json"
-	const commitMessage = `Update ${type} data`
+	const commitMessage = `auto: Update ${type} data`
 
 	if (type === "executives") {
 		// Process executives data
