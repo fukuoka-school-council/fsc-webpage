@@ -3,6 +3,7 @@ import Footer from "@/components/Footer.astro"
 import Header from "@/components/Header.astro"
 import executives from "@/data/executives.json"
 import Layout from "@/layouts/Layout.astro"
+import type { ExecutiveContent } from "@/types/content"
 import t from "@/utils/i18n"
 
 const locale = Astro.preferredLocale || Astro.currentLocale
@@ -15,15 +16,7 @@ const locale = Astro.preferredLocale || Astro.currentLocale
     <div class="executive-container">
       {
         executives.map(
-          (executive: {
-            name: string,
-            furigana?: string,
-            schoolRole: string,
-            role: string,
-            schoolName: string,
-            grade: number,
-            comment: string,
-          }) => (
+          (executive: ExecutiveContent) => (
             <div class="executive-card">
               <div class="avatar">{executive.name.charAt(0)}</div>
               <h2>
