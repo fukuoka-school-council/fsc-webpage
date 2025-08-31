@@ -17,8 +17,20 @@ The Fukuoka School Council is dedicated to "Connecting people and student counci
 
 ```
 /
+├── .gitignore
+├── .vscode/
+│   ├── extensions.json
+│   └── launch.json
+├── LICENSE
+├── README.md
+├── astro.config.mts     # Astro configuration
+├── biome.json          # Biome linting configuration
+├── bun.lock
+├── bun.lockb
+├── package-lock.json
+├── package.json        # Project dependencies
 ├── public/
-│   └── favicon.svg
+│   └── favicon.png
 ├── src/
 │   ├── assets/           # Images and static assets
 │   │   ├── fsc.jpg
@@ -37,15 +49,15 @@ The Fukuoka School Council is dedicated to "Connecting people and student counci
 │   │   └── ja.ts
 │   ├── pages/           # Route components
 │   │   ├── about.astro
+│   │   ├── admin.astro
 │   │   ├── executives.astro
 │   │   ├── index.astro
 │   │   ├── news.astro
 │   │   └── organization.astro
+│   ├── types/
+│   │   └── content.ts
 │   └── utils/           # Utility functions
 │       └── i18n.ts
-├── astro.config.mts     # Astro configuration
-├── biome.json          # Biome linting configuration
-├── package.json        # Project dependencies
 └── tsconfig.json       # TypeScript configuration
 ```
 
@@ -53,10 +65,12 @@ The Fukuoka School Council is dedicated to "Connecting people and student counci
 
 - **Framework**: [Astro](https://astro.build) 5.13.2
 - **Styling**: Custom CSS with CSS Variables
-- **Internationalization**: Custom i18n implementation
+- **Internationalization**: Astro i18n with English and Japanese support
 - **Linting**: [Biome](https://biomejs.dev) 2.1.3
-- **Package Manager**: Bun
+- **Package Manager**: Bun (with npm fallback support)
 - **Language**: TypeScript
+- **Deployment**: Vercel with server-side rendering and edge middleware
+- **Accessibility**: accessible-astro-components library
 
 ## 📦 Installation & Setup
 
@@ -99,6 +113,7 @@ The Fukuoka School Council is dedicated to "Connecting people and student counci
 - **Executives** (`/executives`): Leadership team profiles and information
 - **Organization** (`/organization`): Organizational structure and roles
 - **News** (`/news`): Latest updates and announcements
+- **Admin** (`/admin`): Administrative interface for content management
 
 ## 🎨 Design System
 
@@ -111,7 +126,7 @@ The website uses a custom design system with:
 
 ## 📊 Internationalization
 
-The website supports both English and Japanese languages through a custom i18n implementation. Language detection is automatic based on browser preferences.
+The website supports both English (en) and Japanese (jp) languages through a custom i18n implementation. The default locale is Japanese, and language detection is automatic based on browser preferences.
 
 ### Adding New Translations
 1. Update the locale files in `src/locales/`
